@@ -1,0 +1,251 @@
+/* *{
+  font-family:Azeret Mono;
+} */
+
+.homepagemaindiv{
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+.homeleftdiv{
+  position: sticky;
+  top: 0px;
+  height: 100vh;
+  background-color: #3275e0;
+  width: 100%;
+  font-family:Azeret Mono;
+  
+}
+
+.leftdivtop{
+  background-color: transparent;
+  text-align: center;
+  margin-top: 10px;
+}
+.leftdivtop>img{
+  width: 100px;
+  border-radius: 100px;
+  border: 2px dashed white;
+
+  animation: App-logo-spin ease-in-out 2s ;
+}
+
+.leftdivmenu{
+  
+  display: grid;
+  grid-template-columns: 100%;
+  justify-items: center;
+}
+
+.leftdivmenu>button{
+  font-family:Azeret Mono;
+  width: 60%;
+  margin: 5px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+}
+
+.leftdivmenu>button:hover{
+  transform: scale(110%);
+  border: none;
+  color: white;
+  transition: ease-in-out 300ms;
+  background-color: #1ca095;
+ }
+
+.leftdivmenu>p{
+  /* width: 40%; */
+  margin: 20px;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: 500;
+  
+  }
+
+
+  /* left div ends here */
+
+.homerightdiv{
+  width: 100%;
+  margin-top: 0px;
+}
+
+.rightdivtop{
+  font-family:Azeret Mono;
+  height: 100px;
+  border-bottom: 1px solid rgb(189, 186, 186);
+  align-content: center;
+}
+.rightdivtop>h1{
+  margin-top: 0px;
+  margin-left: 10px;
+  font-family: 1.5rem;
+ 
+  background-color: transparent;
+  margin-bottom: 0px;
+  color: black;
+}
+.rightdivtop>h1>span{
+font-size: .5rem;
+color: #646363;
+}
+
+.rightdivtop>button{
+  position:absolute;
+  top: 20px;
+  right:20px;
+  padding:10px;
+  width:8rem;
+  border:none;
+  border-Radius:50px;
+  color:red;
+  font-Weight:600;
+  cursor: pointer;
+}
+.rightdivtop>button:hover{
+  background-color: #1ca095;
+  color: white;
+  transition: ease-in-out 200ms;
+}
+
+
+  .rightdivmain{
+    margin-left: 10px;
+  }
+
+  .templateDiv{
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    gap: 10px;
+    justify-items: center;
+  }
+
+.templatecard{
+  text-align: center;
+  justify-items: center;
+  display: grid;
+  width: 100%;
+  position:relative;
+  overflow: hidden;
+  grid-template-columns: 100%;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 0.25px grey;
+}
+
+  .templatecard>img{
+    height: 70vh ;
+    width: 100%;
+    object-fit:fill;
+  
+  }
+  .templatecard>button{
+    width: 200px;
+    position: absolute;
+    bottom: 10%;
+    background-color: #3275e0 ;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .templatecard>button:hover{
+   transform: scale(93%);
+   transition: ease-in-out 1s;
+   background-color: #1ca095;
+  }
+
+  .templatecard>h3{
+    text-align: right;
+    position: absolute;
+    top: 22px;
+    right: -45px;
+    width: 150px;
+    text-align: center;
+    color: white;
+    font-size: 0.7rem;
+    padding: 10px;
+    transform: rotate(50deg);
+    background-color: #03193c;
+  }
+
+
+/* form css */
+.maindivfrom{
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.Formdiv{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  justify-items: center;
+  text-align: center;
+  align-items: center;
+  background-color: #e2e2e2;
+  margin-bottom: 10px;
+  border-radius: 10px;
+
+}
+.Formdiv>input{
+  text-align: center;
+  width: 60vw;
+  height: 5vh;
+  background-color: #eff2f9;
+  margin-bottom: 10px;
+  border: none;
+  box-shadow: 0px 0px 2px 0.25px grey;
+}
+
+.Formdiv>textarea{
+  text-align: center;
+  width: 60vw;
+  background-color: #eff2f9;
+  border: none;
+  box-shadow: 0px 0px 2px 0.25px grey;
+  
+  margin-bottom: 10px;
+}
+
+.Formdiv>select{
+  text-align: center;
+  width: 15vw;
+  margin: 5px;
+  height: 5vh;
+  border: none;
+  box-shadow: 0px 0px 2px 0.25px grey;
+  background-color: #eff2f9;
+  margin-bottom: 10px;
+}
+
+.Formdiv>button{
+  text-align: center;
+  width: 10vw;
+  margin: 5px;
+  height: 5vh;
+  border: none;
+  background-color: #03193c;
+  color: white;
+  box-shadow: 0px 0px 2px 0.25px black;
+  border-radius: 50px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+
+
+
+/* green: #1ca095 | blue: #3275e0  */
+
+
+@keyframes App-logo-spin {
+  from {
+    transform:scale(110%);
+  
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
