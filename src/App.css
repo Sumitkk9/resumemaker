@@ -64,6 +64,16 @@
   
   }
 
+  .leftdivbottom{
+    justify-Content:center;
+    margin:10px;
+    position:absolute;
+    bottom:0px;
+    color:whitesmoke;
+    text-Align:center
+  }
+
+
 
   /* left div ends here */
 
@@ -119,6 +129,7 @@ color: #646363;
     display: grid;
     grid-template-columns: 32% 32% 32%;
     gap: 10px;
+    margin-bottom: 50px;
     justify-items: center;
   }
 
@@ -127,6 +138,7 @@ color: #646363;
   justify-items: center;
   display: grid;
   width: 100%;
+  height: 60vh;
   position:relative;
   overflow: hidden;
   grid-template-columns: 100%;
@@ -234,13 +246,29 @@ color: #646363;
   cursor: pointer;
 }
 
+.dialogbox{
 
+  animation: dialogani ease-in-out 300ms ;
+
+}
 
 
 /* green: #1ca095 | blue: #3275e0  */
 
+@keyframes dialogani {
+  from {
+    transform:scale(80%);
+  
+  }
+  to {
+    transform: scale(100%);
+  }
+  
 
-@keyframes App-logo-spin {
+}
+
+
+@keyframes App-logo-spin  {
   from {
     transform:scale(110%);
   
@@ -248,4 +276,59 @@ color: #646363;
   to {
     transform: rotate(360deg);
   }
+}
+
+
+
+@media screen and (max-width: 720px) {
+  .homepagemaindiv{
+    grid-template-columns: 30% 70%;
+  }
+  .leftdivtop>img{
+    width: 70px;
+  }
+  .leftdivmenu>button{
+    width: 90%; 
+  }
+  .leftdivmenu>p{
+    /* width: 40%; */
+    margin: 10px;
+    font-size: 0.8rem; 
+    }
+
+    .leftdivbottom>h4{
+      font-size: 0.5rem;
+    }
+
+    .rightdivtop>h1{
+      width: 200px;
+      font-size: 1rem;  
+    }
+    .rightdivtop>h1>span{
+    font-size: .5rem;
+    color: #646363;
+    }
+    
+    .rightdivtop>button{
+      position:absolute;
+      top: 20px;
+      right:10px;
+      width:5rem;
+      font-Weight:800;
+      cursor: pointer;
+      font-size: 0.6rem;
+    }
+
+    .rightdivtop{
+      font-family:Azeret Mono;
+      height: 9vh;
+      border-bottom: 1px solid rgb(189, 186, 186);
+      align-content: center;
+    }
+    .templateDiv{
+      display: grid;
+      grid-template-columns: 95%;
+      /* gap: 10px; */
+    }
+    
 }

@@ -6,24 +6,31 @@ import Inputform from "./inputform"
 import { Menus,templates } from "./constants";
 import Templatefirst from "./templates/templatesone";
 import Templatetwo from "./templates/templatetwo";
-import { BrowserRouter as Router , Routes, Route } from 'react-router-dom';
+import Templatethree from "./templates/templatethree";
+import { BrowserRouter as Router , Routes, Route,useLocation } from 'react-router-dom';
 const Homepage = ()=>{
 
+    const location = useLocation()
+
+    const isHomepage = location.pathname ==="/"
     const [showEdit,setShowEdit] = useState(false)
 
     useEffect(()=>{
         if(localStorage.getItem("imsresumemakerdata")){
             setShowEdit(true)
         }
+
     },[])
 
-    return <div className="homepagemaindiv">
-        <div className="homeleftdiv">
+    const isSmallScreen = ()=> window.innerWidth<=900
+
+    return <div style={{gridTemplateColumns: isSmallScreen() && !isHomepage && "100%" }} className="homepagemaindiv">
+        <div style={{display: isSmallScreen() && !isHomepage && "none" }} className="homeleftdiv">
             <div className="leftdivtop" >
             <img  src={Logo} alt="logo" />
             <hr style={{width:"80%"}} />
             </div>
-        <div className="leftdivmenu" >
+        <div  className="leftdivmenu" >
             {Menus.map((itms,index)=>{
                 return <button onClick={()=>  window.open(itms.url, "_self", "noopener,noreferrer")} key={index+itms.name}>{itms.name}</button>
             })}
@@ -33,14 +40,7 @@ const Homepage = ()=>{
              <hr style={{width:"80%"}} />
         </div>
 
-        <div style={{
-            justifyContent:"center",
-            margin:"10px",
-            position:"absolute",
-            bottom:"0px",
-            color:"whitesmoke",
-            textAlign:"center"
-        }}>
+        <div className="leftdivbottom">
             <h4 style={{textAlign:"center"}}>Made With 🤍 for you </h4>
             
         </div>
@@ -50,19 +50,23 @@ const Homepage = ()=>{
         <div className="homerightdiv" >
            <div className="rightdivtop" >
    
-            <h1 style={{cursor:"pointer"}} onClick={()=> window.open("/","_self")} > IMS RESUME MAKER <span>Resume Building Made Easy!</span></h1>
-           {showEdit&& <button onClick={()=> window.open("/enterdetails","_self")} >Edit Info... </button>}
+            <h1 style={{cursor:"pointer"}}  onClick={()=> window.open("/","_self")} > IMS RESUME MAKER <span>Resume Building Made Easy!</span></h1>
+           {showEdit&& <button onClick={()=> window.open("/enterdetails","_self")} >View Info... </button>}
            </div>
 
            <div className="rightdivmain" >
-            <Router>
+           
                 <Routes>
                     <Route path="/" element={<Templatecard/>}/>
                     <Route path="/enterdetails" element={<Inputform/>}/>
-                    <Route path="classictemplate1" element={<Templatefirst/>}/>
-                    <Route path="classictemplate2" element={<Templatetwo/>}/>
+                    <Route path="/classictemplate1" element={<Templatefirst/>}/>
+                    <Route path="/classictemplate2" element={<Templatetwo/>}/>
+                    <Route path="/classictemplate3" element={<Templatethree/>}/>
+
                 </Routes>
-            </Router>
+               
+    
+          
 
 
             {/* <Inputform/> */}

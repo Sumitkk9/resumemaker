@@ -153,6 +153,8 @@ const Inputform = ()=>{
                 
             });
 
+            console.log(formObject)
+
         setFormData([formObject])
         localStorage.setItem( "imsresumemakerdata",JSON.stringify(formObject))
 
@@ -280,7 +282,7 @@ const Inputform = ()=>{
                 endmvalue={edu[`exp${expNo}endmonth`]}
                 endyvalue={edu[`exp${expNo}endyear`]}
                 expvalue={edu[`exp${expNo}exptype`]}
-                present={"exp"+expNo+"doing"}
+                // present={"exp"+expNo+"doing"}
                 exptitle={"exp"+expNo+"title"}
                 expdesc={"exp"+expNo+"desc"}
                 startmonth={"exp"+expNo+"startmonth"}
@@ -346,7 +348,7 @@ const Inputform = ()=>{
                     startyvalue={edu[`edu${index}${no+1}srtyear`]}
                     endmvalue={edu[`edu${index}${no+1}endmonth`]}
                     endyvalue={edu[`edu${index}${no+1}endyear`]}
-                    present={"edu"+(index+1)+"doing"}
+                    // Present={"edu"+(index+1)+"doing"}
                     exptitle={"edu"+(index+1)+"t"}
                     expdesc={"edu"+index+1+"d"}
                     startmonth={"edu"+index+1+"srtmonth"}

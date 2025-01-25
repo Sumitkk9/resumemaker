@@ -26,7 +26,7 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
     titlevalue,descvalue,startmvalue,endmvalue,startyvalue,
     endyvalue,expvalue,
     startmonth,startyear,
-    endmonth,endyear, present,
+    endmonth,endyear, Present,
     exptype,ondelete})=>{
     const months = [
         "January", "February", "March", "April", "May", "June",
@@ -38,7 +38,7 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
         let year = 1990+i
         yearArr.push(year)
     }
-    const [showEnd,setShowend] = useState(true)
+    const [showEnd,setShowend] = useState(false)
     return <>
 
     {/* <button onClick={(e)=>ondelete(e)}>Delete</button> */}
@@ -46,7 +46,7 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
     <input type='text' value={titlevalue&& titlevalue}  name={exptitle} required placeholder='Title'/> <br/>
     <textarea name={expdesc} value={descvalue&& descvalue}  required placeholder= {descplaceh? descplaceh :'Description: List Your Major duties and successes, skills used.'}/> <br/>
     { exptype && <> <label> Experience Type </label>
-    <select value={expvalue&& expvalue} name={exptype}>
+    <select required value={expvalue&& expvalue} name={exptype}>
         <option value="" disabled selected>
             Type
         </option>
@@ -56,7 +56,7 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
     </select> <br/> </>}
    <>
    <label> Start Date </label> <br/>
-   <select value={startmvalue&& startmvalue} name={startmonth}>
+   <select required value={startmvalue&& startmvalue} name={startmonth}>
     <option value="" disabled selected>
            Month
         </option>
@@ -64,7 +64,7 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
        return <option key={month}>{month}</option>
        })}
     </select>
-    <select value={startyvalue&& startyvalue} name={startyear}>
+    <select required value={startyvalue&& startyvalue} name={startyear}>
     <option value="" disabled selected>
            Year
         </option>
@@ -74,24 +74,22 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
     </select> <br/>
    </>
  
-  <div>
-  <input type="checkbox"  onChange={()=>setShowend((prev)=> !prev)} value={"present"} name={present}/> I am currently doing. <br/>
-  </div>
-   
-   { showEnd&&
+  {/* <div>
+  <input type="checkbox" value={showEnd} onChange={()=>setShowend((prev)=> !prev)}  name={Present}/> I am currently doing. <br/>
+  </div> */}
     <>
     <label> End Date </label>  <br/>
     
-   <select value={endmvalue&& endmvalue} name={endmonth}>
-    <option value="" disabled selected>
+   <select required value={endmvalue&& endmvalue} name={endmonth}>
+    <option value="null" disabled selected>
            Month
         </option>
        {months.map((month)=>{
-       return <option key={month}>{month}</option>
+       return <option  key={month}>{month}</option>
        })}
     </select>
-    <select  value={ endyvalue} name={endyear}>
-    <option value="" disabled selected>
+    <select required  value={ endyvalue&& endyvalue} name={endyear}>
+    <option value="null" disabled selected>
            Year
         </option>
        {yearArr.map((year)=>{
@@ -99,7 +97,6 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
        })}
     </select> <br/>
     </>
-   }
     
 
     </>

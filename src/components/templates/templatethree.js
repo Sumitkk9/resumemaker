@@ -1,6 +1,6 @@
-import react,{useRef,useState,useEffect} from "react"
+import React,{useRef,useState,useEffect} from "react"
 import PdfDownload from "../downloadpdf"
-const Templatefirst = ()=>{
+const Templatethree = ()=>{
 
     const [data,setData] = useState()
     const localData = JSON.parse(localStorage.getItem("imsresumemakerdata"))
@@ -43,6 +43,7 @@ const Templatefirst = ()=>{
         
         fontFamily: "Wix Madefor Text"
     }}>
+         <hr style={{border:"2px solid black"}}/>
         <div style={{
             textAlign:"center",
             marginTop:"10px",
@@ -82,6 +83,7 @@ const Templatefirst = ()=>{
                 fontSize:"16px",
                 margin:"0px"
             }}>Summary</h4>
+            <hr style={{borderTop:"1px solid black"}}/>
             <p style={{
                 fontSize:"15px",
                 margin:"0px"
@@ -93,6 +95,7 @@ const Templatefirst = ()=>{
                 fontSize:"16px",
                 marginBottom:"0px"
             }}>Technical Skills</h4>
+             <hr style={{borderTop:"1px solid black"}}/>
         <div style={{
             display:"grid",
             gridTemplateColumns:"80% 20%",
@@ -130,7 +133,7 @@ const Templatefirst = ()=>{
                 fontSize:"16px",
                 marginBottom:"0px"
             }}>Experience</h4>
-
+        <hr style={{borderTop:"1px solid black"}}/>
                 {data&&data.exp.map((item,index)=>{
                     return <>
                     <h4 style={{
@@ -154,6 +157,7 @@ const Templatefirst = ()=>{
                 fontSize:"16px",
                 marginBottom:"0px",
             }}>Personal Projects</h4>
+             <hr style={{borderTop:"1px solid black"}}/>
        
         <ul style={{
                 fontSize:"15px",
@@ -176,6 +180,7 @@ const Templatefirst = ()=>{
                 fontSize:"16px",
                 marginBottom:"0px",
             }}>Education</h4>
+             <hr style={{borderTop:"1px solid black"}}/>
        
         <ul style={{
                 fontSize:"15px",
@@ -227,4 +232,4 @@ const Templatefirst = ()=>{
     </div>
 }
 
-export default Templatefirst
+export default Templatethree

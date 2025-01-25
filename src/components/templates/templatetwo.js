@@ -15,15 +15,23 @@ const Templatefirst = ()=>{
         console.log(data)
         PdfDownload(DivRef)
     }
+     const isSmallScreen = ()=> window.innerWidth<=900
+
     return <div style={{
         width:"100%",
-        justifyItems:"center",
+        marginBottom:"100px"
         }} > 
+         <h3 style={{position:"sticky",
+            top:"0px",
+            backgroundColor:"#3275e0",
+            padding:"10px",
+            color:"white"
+            }} > {data&&data.fullname} - Resume</h3>
         { !data? <h1>loading</h1> :
         <div style={{
-        width:"50vw",
-        alignItems:"center",
-        border:"1px solid black"
+        width:isSmallScreen()?"97vw":"70vw",
+        justifySelf:"center",
+        border:"1px solid black",
         }}>
      <div ref={DivRef} style={{
         padding:"5px",

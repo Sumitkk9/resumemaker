@@ -1,11 +1,12 @@
 import React from "react";
+import "../App.css"
 
 const Dialog = ({oncancel})=>{
 
     const onclick = ()=>{
       window.open("/enterdetails","_self")
     }
-    return <div style={{
+    return <div className="dialogbox" style={{
        justifyItems:"center",
        marginTop:"10%" 
     }} >
@@ -13,7 +14,7 @@ const Dialog = ({oncancel})=>{
             style={{
                     width:"60vw",
                     height:"120px",
-                    border:"1px solid black",
+                   
                     padding:"10px",
                     borderRadius:"10px",
                     background:"white",
@@ -26,7 +27,7 @@ const Dialog = ({oncancel})=>{
                     margin:"0px",
                     fontSize:"1rem",
                     fontWeight:"500"
-                   }} >Enter your details once and download any template of your choice afterward.</p>
+                   }} >Enter your details once and download any resume of your choice afterward.</p>
                    <div style={{
                     marginTop:"10px",
                     display:"flex",
