@@ -161,11 +161,11 @@ const Inputform = ()=>{
             
             clearInterval(widthinterval)
              window.open("/","_self")
-        },3000)
+        },2000)
       
        const widthinterval =  setInterval(()=>{
             setPercent((prev)=>prev+2)
-        },32)
+        },21)
     }
 
     const [value,setValue] = useState()
