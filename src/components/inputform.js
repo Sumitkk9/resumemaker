@@ -6,7 +6,7 @@ const Inputform = ()=>{
     const [localData,setLocaldata] = useState()
     const [formDataState,setFormData] = useState([])
     const [skillNo, setSkillNo] = useState(2);
-    const [expNo, setExpNo] = useState(0);
+    const [show, setShow] = useState(false);
 
     const [skillAddMore, setskillAddMore] = useState([[]])
     const [expAddMore, setExpMore] = useState([[]])
@@ -72,8 +72,7 @@ const Inputform = ()=>{
         }
 
     
-
-
+        const [percent,setPercent] = useState(2)
     const onsubmit = (e)=>{
         e.preventDefault()
         const formData = new FormData(e.target); // Get form data
@@ -157,9 +156,16 @@ const Inputform = ()=>{
 
         setFormData([formObject])
         localStorage.setItem( "imsresumemakerdata",JSON.stringify(formObject))
-
-        
-        // window.open("/","_self")
+        setShow(true)
+        setTimeout(()=>{
+            
+            clearInterval(widthinterval)
+             window.open("/","_self")
+        },3000)
+      
+       const widthinterval =  setInterval(()=>{
+            setPercent((prev)=>prev+2)
+        },32)
     }
 
     const [value,setValue] = useState()
@@ -169,6 +175,26 @@ const Inputform = ()=>{
     }
     return(
         <div className='maindivfrom' >
+            {show&&  <div style={{
+            background:"white",
+            padding:"5px",
+            justifyContent:"center",
+            alignItems:"center",
+            transition:"ease-in-out 5ms",
+            position:"fixed",
+            top:"50px",
+            right:"20px",
+            zIndex:10,
+            boxShadow:"1px 1px 5px 2px grey"
+         }}>
+            <div style={{
+                width: percent,
+                background:"green",
+                height:"2px",
+               
+            }}></div>
+            <h6 style={{textAlign:"center",margin:"0px",background:"transparent",fontSize:"1rem"}}>Information Saved ✅ <br/> Now Create Your Resume </h6>
+            </div>} 
             
             <form onSubmit={onsubmit} >
             <div className='Formdiv' >

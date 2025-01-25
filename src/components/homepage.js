@@ -16,7 +16,7 @@ const Homepage = ()=>{
     const [showEdit,setShowEdit] = useState(false)
 
     useEffect(()=>{
-        if(localStorage.getItem("imsresumemakerdata")){
+        if(localStorage.getItem("imsresumemakerdata") ) {
             setShowEdit(true)
         }
 
@@ -51,7 +51,7 @@ const Homepage = ()=>{
            <div className="rightdivtop" >
    
             <h1 style={{cursor:"pointer"}}  onClick={()=> window.open("/","_self")} > IMS RESUME MAKER <span>Resume Building Made Easy!</span></h1>
-           {showEdit&& <button onClick={()=> window.open("/enterdetails","_self")} >View Info... </button>}
+           {showEdit&& <button onClick={()=> window.open(isHomepage? "/enterdetails":"/","_self")} > {isHomepage?" View Info..." : "HOME" } </button>}
            </div>
 
            <div className="rightdivmain" >
