@@ -29,7 +29,7 @@ const Templatefirst = ()=>{
             }} > {data&&data.fullname} - Resume</h3>
         { !data? <h1>loading</h1> :
         <div style={{
-        width:isSmallScreen()?"97vw":"70vw",
+        width:isSmallScreen()?"95vw":"70vw",
         justifySelf:"center",
         border:"1px solid black",
         }}>
