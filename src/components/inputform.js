@@ -22,24 +22,24 @@ const Inputform = ()=>{
             setLocaldata(data)
         }
         if(data){
-            setEdu(data.educations)
+            data.educations&& setEdu(data.educations)
         }
         if(data){
-            setPp(data.pproject)
-        }
-
-        if(data){
-            setExpMore(data.exp)
-        }
-        if(data){
-            setskillAddMore(data.skill)
+            data.pproject&&  setPp(data.pproject)
         }
 
         if(data){
-             setCert(data.certification)
+            data.exp&&   setExpMore(data.exp)
         }
         if(data){
-            setAchiev(data.Achievements)
+            data.skill&& setskillAddMore(data.skill)
+        }
+
+        if(data){
+            data.certification&& setCert(data.certification)
+        }
+        if(data){
+            data.Achievements&&   setAchiev(data.Achievements)
         }
         
     },[])
