@@ -136,7 +136,7 @@ const Templatefirst = ()=>{
                 fontSize:"15px",
                 margin:"0px",
                 color:"navy"
-            }}> {item[`exptitle`]}  | {item[`expstartmonth`]} {item[`expstartyear`]} – {item[`expendmonth`]} {item[`expendyear`]} </h4>
+            }}> {item[`exptitle`]}  | {item[`expstartmonth`]} {item[`expstartyear`]} - { item.expdoing? item.expdoing : <>  {item[`expendmonth`]} { item[`expendyear`]} </>  }</h4>
             <p style={{
                 fontSize:"15px",
                 margin:"0px"
@@ -188,8 +188,8 @@ const Templatefirst = ()=>{
                      <li style={{
                             fontWeight:"600" ,       
                             }}>{item[`edut`]}</li>
-                            <p style={{margin:"0px"}}> {item[`edud`]} | {item[`edusrtmonth`]} {item[`edusrtyear`]}– {item[`eduendmonth`]} {item[`eduendyear`]}</p>
-                    </>
+                            <p style={{margin:"0px"}}> {item[`edud`]} | {item[`edusrtmonth`]} {item[`edusrtyear`]}– { item.edudoing? item.edudoing : <>  {item[`eduendmonth`]} { item[`eduendyear`]} </>  } </p>
+                            </>
                    })}
        
        
