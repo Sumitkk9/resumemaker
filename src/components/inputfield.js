@@ -1,23 +1,76 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 
 
-const Inputfield = ({skillname,skillrating,skillvalue,skilrvalue})=>{
-    return <>
+const Inputfield = ({skillname,skillrating,skillvalue,skilrvalue,onchange})=>{
+    const [ skillV,SetSkillValue] = useState()
     
-    <input type='text' value={skillvalue&& skillvalue} name={skillname} required placeholder='Skill Name'/>
-    <input type='number' value={skilrvalue&& skilrvalue} name={skillrating} max={5} min={0} required placeholder='Rating'/>
-    <label> /5</label><br/>
+    useEffect(()=>{
+            SetSkillValue({value:skillvalue, rating:skilrvalue})
+    },[skillvalue])
+
+   return <>
+    
+    <input 
+    type='text' 
+    value={skillV &&skillV.value} 
+    name={skillname} 
+    required 
+    style={{width:"50vw"}}
+    onChange={(e)=> SetSkillValue(skillV&&  skillV.value)}
+    placeholder='Skill Name'
+    />
+    <input 
+    style={{width:"10vw"}}
+    type='number' 
+    value={skillV &&skillV.rating} 
+    onChange={(e)=> SetSkillValue(skillV&& skillV.rating)}
+    name={skillrating} 
+    max={5} 
+    min={0} 
+    
+    required 
+    placeholder='Rating'/>
+    <label style={{position:"absolute", margin:"5px"}}> / 5</label><br/>
     </>
 }
 
 const Inputfieldtwo = ({title,desc,titleplaceh,
     descplaceh,projectUrl, titlevalue,descvalue,projurlvalue})=>{
+
+        const [ iptwo,SetiptwoValue] = useState()
+    
+        useEffect(()=>{
+                SetiptwoValue({title:titlevalue, desc:descvalue, url:projurlvalue })
+        },[titlevalue])
     return <>
     
-    <input type='text' value={titlevalue&&titlevalue} name={title} required placeholder= {titleplaceh? titleplaceh : 'Title'}/> <br/>
-    <input type='text' name={desc} value={descvalue&&descvalue}  required placeholder={descplaceh? descplaceh :'Description'}/> <br/>
-    <input type='text' name={projectUrl} value={projurlvalue&&projurlvalue}  required placeholder={'Git Url | Live Url'}/> <br/>
+    <input 
+    type='text' 
+    value={iptwo&& iptwo.title} 
+    onChange={(e)=> SetiptwoValue(iptwo && iptwo.title)}
+    name={title} 
+    required 
+    placeholder= {titleplaceh? titleplaceh : 'Title'}
+    /> <br/>
 
+   {desc&& <> <input 
+    type='text' 
+    name={desc} 
+    value={iptwo&& iptwo.desc} 
+    onChange={(e)=> SetiptwoValue(iptwo&& iptwo.desc)}
+    required placeholder={descplaceh? 
+    descplaceh :'Description'}
+    /> <br/> </> } 
+
+    { projectUrl && <>
+    <input 
+    type='text' 
+    name={projectUrl} 
+    value={iptwo&& iptwo.url}   
+    onChange={(e)=> SetiptwoValue(iptwo&& iptwo.url)}
+    required placeholder={desc?'Git Url | Live Url':"Relevant Url"}
+    /> <br/>
+       </> }
     </>
 }
 
@@ -28,6 +81,20 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
     startmonth,startyear,
     endmonth,endyear, Present,
     exptype,ondelete})=>{
+
+        const [ ip2,Setip2Value] = useState()
+    
+        useEffect(()=>{
+            Setip2Value({title:titlevalue, 
+                    desc:descvalue, 
+                    startm:startmvalue,
+                    endm: endmvalue?  endmvalue : "null",
+                    starty : startyvalue,
+                    endy: endyvalue? endyvalue : "null",
+                    exptype: expvalue
+                 })
+        },[titlevalue])
+
     const months = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -43,10 +110,29 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
 
     {/* <button onClick={(e)=>ondelete(e)}>Delete</button> */}
     
-    <input type='text' value={titlevalue&& titlevalue}  name={exptitle} required placeholder='Title'/> <br/>
-    <textarea name={expdesc} value={descvalue&& descvalue}  required placeholder= {descplaceh? descplaceh :'Description: List Your Major duties and successes, skills used.'}/> <br/>
+    <input 
+    type='text' 
+    value={ip2&& ip2.title}   
+    onChange={(e)=> Setip2Value(ip2&& ip2.title)}
+    name={exptitle} 
+    required 
+    placeholder='Title'
+    /> <br/>
+
+    <textarea 
+    name={expdesc} 
+    value={ip2&& ip2.desc}   
+    onChange={(e)=> Setip2Value(ip2&& ip2.desc)}
+    required 
+    placeholder= {descplaceh? descplaceh :'Description: List Your Major duties and successes, skills used.'}
+    /> <br/>
+
     { exptype && <> <label> Experience Type </label>
-    <select required value={expvalue&& expvalue} name={exptype}>
+    <select 
+        required 
+        value={ip2&& ip2.exptype}   
+         onChange={(e)=> Setip2Value(ip2&& ip2.exptype)}
+        name={exptype}>
         <option value="" disabled selected>
             Type
         </option>
@@ -56,7 +142,11 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
     </select> <br/> </>}
    <>
    <label> Start Date </label> <br/>
-   <select required value={startmvalue&& startmvalue} name={startmonth}>
+   <select
+    required 
+    value={ip2&& ip2.startm}   
+    onChange={(e)=> Setip2Value(ip2&& ip2.startm)}
+     name={startmonth}>
     <option value="" disabled selected>
            Month
         </option>
@@ -64,7 +154,11 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
        return <option key={month}>{month}</option>
        })}
     </select>
-    <select required value={startyvalue&& startyvalue} name={startyear}>
+    <select
+     required 
+     value={ip2&& ip2.starty}   
+     onChange={(e)=> Setip2Value(ip2&& ip2.starty)}
+     name={startyear}>
     <option value="" disabled selected>
            Year
         </option>
@@ -74,13 +168,19 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
     </select> <br/>
    </>
  
-  {/* <div>
-  <input type="checkbox" value={showEnd} onChange={()=>setShowend((prev)=> !prev)}  name={Present}/> I am currently doing. <br/>
-  </div> */}
+  <div>
+  <input type="checkbox" value={"Present"} onChange={()=>setShowend((prev)=> !prev)}  name={Present}/> I am currently doing. <br/>
+  </div>
+ 
     <>
-    <label> End Date </label>  <br/>
+    <label style={{display:showEnd&&"none"}}> End Date </label>  <br/>
     
-   <select required value={endmvalue&& endmvalue} name={endmonth}>
+   <select 
+   required 
+   style={{display:showEnd&&"none"}}
+   value={ip2&& ip2.endm }   
+   onChange={(e)=> Setip2Value(ip2&& ip2.endm)}
+   name={endmonth}>
     <option value="null" disabled selected>
            Month
         </option>
@@ -88,16 +188,20 @@ const Inputfield2 = ({descplaceh,exptitle,expdesc,
        return <option  key={month}>{month}</option>
        })}
     </select>
-    <select required  value={ endyvalue&& endyvalue} name={endyear}>
-    <option value="null" disabled selected>
+    <select 
+    required 
+    style={{display:showEnd&&"none"}} 
+    value={ip2&& ip2.endy}   
+    onChange={(e)=> Setip2Value(ip2&& ip2.endy)}
+    name={endyear}>
+    {/* <option value="null" disabled selected>
            Year
-        </option>
+        </option> */}
        {yearArr.map((year)=>{
        return <option key={year}>{year}</option>
        })}
     </select> <br/>
     </>
-    
 
     </>
 }

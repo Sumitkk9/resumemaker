@@ -8,6 +8,9 @@ import Templatefirst from "./templates/templatesone";
 import Templatetwo from "./templates/templatetwo";
 import Templatethree from "./templates/templatethree";
 import { BrowserRouter as Router , Routes, Route,useLocation } from 'react-router-dom';
+import Templatefour from "./templates/templatefour";
+import Templatefive from "./templates/templatefive";
+
 const Homepage = ()=>{
 
     const location = useLocation()
@@ -51,7 +54,7 @@ const Homepage = ()=>{
            <div className="rightdivtop" >
    
             <h1 style={{cursor:"pointer"}}  onClick={()=> window.open("/","_self")} > IMS RESUME MAKER <span>Resume Building Made Easy!</span></h1>
-           {showEdit&& <button onClick={()=> window.open(isHomepage? "/enterdetails":"/","_self")} > {isHomepage?" View Info..." : "HOME" } </button>}
+           {showEdit&& <button onClick={()=> window.open(isHomepage? "/enterdetails":"/","_self")} > {isHomepage?" Edit Info..." : "HOME" } </button>}
            </div>
 
            <div className="rightdivmain" >
@@ -62,6 +65,8 @@ const Homepage = ()=>{
                     <Route path="/classictemplate1" element={<Templatefirst/>}/>
                     <Route path="/classictemplate2" element={<Templatetwo/>}/>
                     <Route path="/classictemplate3" element={<Templatethree/>}/>
+                    <Route path="/classictemplate4" element={<Templatefour/>}/>
+                    <Route path="/classictemplate5" element={<Templatefive/>}/>
 
                 </Routes>
                

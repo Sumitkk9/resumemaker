@@ -1,5 +1,6 @@
 import react,{useRef,useState,useEffect} from "react"
 import PdfDownload from "../downloadpdf"
+import "../../App.css"
 const Templatefirst = ()=>{
 
     const [data,setData] = useState()
@@ -105,7 +106,7 @@ const Templatefirst = ()=>{
             }} >
                    {data&&data.skill.map((item,index)=>{
                     let no=0
-                    return <li>{item[`skill${index}${no+1}`]}</li>
+                    return <li>{item[`skill`]}</li>
                    })}
                     
                 </ul>
@@ -118,7 +119,7 @@ const Templatefirst = ()=>{
             }} >
                     {data&&data.skill.map((item,index)=>{
                         let no =0
-                    return <li>{item[`skill${index}${no+1}r`]}/5</li>
+                    return <li>{item[`skillr`]}/5</li>
                    })}
                 </ul>
             </div>
@@ -137,11 +138,11 @@ const Templatefirst = ()=>{
                 fontSize:"15px",
                 margin:"0px",
                 color:"navy"
-            }}> {item[`exp${index}title`]}  | {item[`exp${index}startmonth`]} {item[`exp${index}startyear`]} – {item[`exp${index}endmonth`]} {item[`exp${index}endyear`]} </h4>
+            }}> {item[`exptitle`]}  | {item[`expstartmonth`]} {item[`expstartyear`]} – {item[`expendmonth`]} {item[`expendyear`]} </h4>
             <p style={{
                 fontSize:"15px",
                 margin:"0px"
-            }}>{item[`exp${index}desc`]}</p>
+            }}>{item[`expdesc`]}</p>
                     </>
                    })}
                    
@@ -163,7 +164,7 @@ const Templatefirst = ()=>{
                 
                 {data&&data.pproject.map((item,index)=>{
                    let no=0
-                   return  <li> <a href={item[`pp${index}${no+1}url`]}>{item[`pp${index + 1}t`]}</a> : {item[`pp${index}${no+1}d`]}</li>
+                   return  <li> <a href={item[`ppurl`]}>{item[`ppt`]}</a> : {item[`ppd`]}</li>
                    })}
        
        
@@ -188,16 +189,59 @@ const Templatefirst = ()=>{
                     return <>
                      <li style={{
                             fontWeight:"600" ,       
-                            }}>{item[`edu${index + 1}t`]}</li>
-                            <p style={{margin:"0px"}}> {item[`edu${index}${no+1}d`]} | {item[`edu${index}${no+1}srtmonth`]} {item[`edu${index}${no+1}srtyear`]}– {item[`edu${index}${no+1}endmonth`]} {item[`edu${index}${no+1}endyear`]}</p>
+                            }}>{item[`edut`]}</li>
+                            <p style={{margin:"0px"}}> {item[`edud`]} | {item[`edusrtmonth`]} {item[`edusrtyear`]}– {item[`eduendmonth`]} {item[`eduendyear`]}</p>
                     </>
+                   })}
+       
+       
+        </ul>
+         
+        </div>
+        { data.certification &&
+        <div>
+        <h4 style={{
+                fontSize:"16px",
+                marginBottom:"0px",
+            }}>Certifications</h4>
+       
+        <ul style={{
+                fontSize:"15px",
+                margin:"0px",
+            }}>
+
+                
+                {data&&data.certification.map((item,index)=>{
+                   return  <li key={"cert"+index}> <a href={item[`cert-url`]}>{item[`cert-title`]}</a></li>
+                   })}
+       
+       
+        </ul>
+           
+         </div>
+            }
+        { data.Achievements &&
+        <div>
+        <h4 style={{
+                fontSize:"16px",
+                marginBottom:"0px",
+            }}>Achievements</h4>
+       
+        <ul style={{
+                fontSize:"15px",
+                margin:"0px",
+            }}>
+
+                
+                {data&&data.Achievements.map((item,index)=>{
+                   return  <li key={"achiv"+index}> {item.Achievements}</li>
                    })}
        
        
         </ul>
            
         </div>
-
+        }
        
 
     </div>
@@ -219,7 +263,7 @@ const Templatefirst = ()=>{
         borderRadius:"5px",
         fontWeight:"600",
         cursor:"pointer"
-    }} onClick={donwloadHandler} > Download As Pdf ⬇️</button>
+    }}  className="downloadBtn" onClick={donwloadHandler} > Download As Pdf ⬇️</button>
     </div>
    
     </div>

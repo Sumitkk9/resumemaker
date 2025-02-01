@@ -1,10 +1,16 @@
 import React from "react";
 import "../App.css"
+import { demoData } from "./constants";
 
 const Dialog = ({oncancel})=>{
 
     const onclick = ()=>{
       window.open("/enterdetails","_self")
+    }
+
+    const ondemoData = ()=>{
+        localStorage.setItem("imsresumemakerdata",JSON.stringify(demoData))
+        window.open("/enterdetails","_self")
     }
     return <div className="dialogbox" style={{
        justifyItems:"center",
@@ -44,6 +50,15 @@ const Dialog = ({oncancel})=>{
                         border:"1px solid grey",
                          fontWeight:"600"
                     }} onClick={oncancel} >Cancel</button>
+
+                    <button style={{
+                        padding:"10px",
+                        cursor:"pointer",
+                        background:"none",
+                        borderRadius:"5px",
+                        border:"1px solid grey",
+                        fontWeight:"600"
+                    }} onClick={ondemoData} >Use Demo Data</button>
                     <button 
                     onClick={onclick}
                     style={{

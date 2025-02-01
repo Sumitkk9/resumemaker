@@ -1,17 +1,19 @@
 import react,{useState,useEffect} from 'react'
 import {Inputfield,Inputfield2,Inputfieldtwo} from './inputfield.js'
 import "../App.css"
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 const Inputform = ()=>{
 
     const [localData,setLocaldata] = useState()
     const [formDataState,setFormData] = useState([])
-    const [skillNo, setSkillNo] = useState(2);
-    const [show, setShow] = useState(false);
 
+    const [show, setShow] = useState(false);
+    const [certification, setCert] = useState([[]]);
     const [skillAddMore, setskillAddMore] = useState([[]])
     const [expAddMore, setExpMore] = useState([[]])
     const [pproject,setPp] = useState([[]])
     const [edu,setEdu] = useState([[]])
+    const [achiev,setAchiev] = useState([[]])
 
 
     useEffect(()=>{
@@ -32,18 +34,17 @@ const Inputform = ()=>{
         if(data){
             setskillAddMore(data.skill)
         }
+
+        if(data){
+             setCert(data.certification)
+        }
+        if(data){
+            setAchiev(data.Achievements)
+        }
         
     },[])
 
-    const ondelete = (e,no)=>{
-        e.preventDefault() 
-        // e.target.parentElement.style.display="none" 
     
-        const updatedItems = expAddMore.filter((item) => item !== item.key==`"${no}`);
-        // setexpSkillMore(updatedItems)
-        
-      //
-    }
 
         const addMore = (e,field)=>{
             e.preventDefault()
@@ -62,12 +63,21 @@ const Inputform = ()=>{
                     
             }
 
-           
-
+            if(field ==="cert"){
+                setCert((prev)=> [...prev,[]])
+                    
+            }
+            
             if(field ==="exp"){
                 setExpMore((prev)=> [...prev,[]])
                     
             } 
+
+            if(field ==="Achievements"){
+                setAchiev((prev)=> [...prev,[]])
+                    
+            } 
+
 
         }
 
@@ -81,10 +91,14 @@ const Inputform = ()=>{
             const expArr = []
             const pprojectarr = []
             const Educationarr = []
+            const certArr = []
+            const achievArr = []
             let skillNo =0
             let expNo = 0
             let pprojno = 0
             let eduno = 0
+            let certno = 0
+            let achievno = 0
             let obj = {}
 
             formData.forEach((value, key) => {
@@ -107,7 +121,6 @@ const Inputform = ()=>{
                     if(key.includes("exp") ){ 
                         expNo++
                         obj[key] =value 
-
                         if(expNo>6){
                             expArr.push(obj)
                             obj = {}
@@ -135,8 +148,8 @@ const Inputform = ()=>{
                     if(key.includes("edu") ){ 
                         eduno++
                         obj[key] =value 
-
                         if(eduno>5){
+                           
                             Educationarr.push(obj)
                             obj = {}
                             eduno=0
@@ -145,14 +158,39 @@ const Inputform = ()=>{
                 formObject.educations = Educationarr
                   
                   
-                }  else{
+                } else if(key.includes("cert") ){
+                    if(key.includes("cert") ){ 
+                        certno++
+                        obj[key] =value 
+                        if(certno>1){
+                           
+                            certArr.push(obj)
+                            obj = {}
+                            certno=0
+                        } 
+                    } 
+                formObject.certification = certArr
+                  
+                  
+                }  else if(key.includes("Achievements") ){
+                    if(key.includes("Achievements") ){ 
+                        achievno++
+                        obj[key] =value 
+                            achievArr.push(obj)
+                            obj = {}
+                            achievno=0  
+                    } 
+                formObject.Achievements = achievArr
+                  
+                  
+                } else{
                     formObject[key] = value;
                 }
                 
                 
             });
 
-            console.log(formObject)
+            // console.log(formObject)
 
         setFormData([formObject])
         localStorage.setItem( "imsresumemakerdata",JSON.stringify(formObject))
@@ -168,11 +206,74 @@ const Inputform = ()=>{
         },21)
     }
 
-    const [value,setValue] = useState()
 
-    const onchnage = (e)=>{
-        setValue(e.target.value)
+    const [check,setCheck] = useState(true)
+
+    const ondelete = (e,no,sec)=>{
+        e.preventDefault() 
+
+      
+       if(sec==="skill"){
+        const ind =  skillAddMore.indexOf(no)
+        if (ind !== -1) {
+            skillAddMore.splice(ind,1)
+            setCheck(false)
+           }
+       }
+
+       if(sec==="pp"){
+        const ind =  pproject.indexOf(no)
+        if (ind !== -1) {
+            pproject.splice(ind,1)
+            setCheck(false)
+           }
+       }
+       if(sec==="exp"){
+        const ind =  expAddMore.indexOf(no)
+        if (ind !== -1) {
+            expAddMore.splice(ind,1)
+            setCheck(false)
+           }
+       }
+       if(sec==="edu"){
+        const ind =  edu.indexOf(no)
+        if (ind !== -1) {
+            edu.splice(ind,1)
+            setCheck(false)
+           }
+       }
+       
+       if(sec==="cert"){
+        const ind =  certification.indexOf(no)
+        if (ind !== -1) {
+            certification.splice(ind,1)
+            setCheck(false)
+           }
+       }
+
+       if(sec==="Achievements"){
+        const ind =  achiev.indexOf(no)
+        if (ind !== -1) {
+            achiev.splice(ind,1)
+            setCheck(false)
+           }
+       }
+      
+       
+       setTimeout(() => {
+        setCheck(true)
+       }, 100);
     }
+
+    const resetForm = (e)=>{
+        e.preventDefault()
+        alert("Do you really want to reset your info?")
+        localStorage.removeItem("imsresumemakerdata")
+        window.location.reload();
+
+    }
+
+    
     return(
         <div className='maindivfrom' >
             {show&&  <div style={{
@@ -196,19 +297,31 @@ const Inputform = ()=>{
             <h6 style={{textAlign:"center",margin:"0px",background:"transparent",fontSize:"1rem"}}>Information Saved ✅ <br/> Now Create Your Resume </h6>
             </div>} 
             
-            <form onSubmit={onsubmit} >
+            <form  onSubmit={onsubmit} >
             <div className='Formdiv' >
+           {localData&& <> <button  
+            style={{
+                position:"absolute",
+                right:"10px",
+                width:"100px",
+                backgroundColor:"red"
+            }} 
+            onClick={(e)=>resetForm(e)}  
+            >Reset Form</button> <br/> </>}
+
                 <h2>Personal info</h2>
                 <input 
                 value = { localData&& localData.fullname} 
                 type='text' 
                 name='fullname' 
+                onChange={()=> setLocaldata(localData&&localData.fullname)}
                 required 
                 contentEditable={true}
                 placeholder='Enter Full Name'/><br/>
 
                 <input 
                 value={ localData&& localData.role} 
+                onChange={()=> setLocaldata(localData&&localData.role)}
                 type='text' 
                 name='role' 
                 placeholder='Role: eg. frontend,backend etc..'/><br/>
@@ -221,6 +334,7 @@ const Inputform = ()=>{
                     maxLength={10} 
                     required 
                     value={ localData&& localData.phoneno} 
+                    onChange={()=> setLocaldata(localData&&localData.phoneno)}
                     name='phoneno'
                     placeholder='Phone No.' 
                     pattern="\d{10}" 
@@ -233,6 +347,7 @@ const Inputform = ()=>{
                 required 
                 placeholder='Email id'
                 value={ localData&& localData.email} 
+                onChange={()=> setLocaldata(localData&&localData.email)}
                 /><br/>
             </div>
 
@@ -243,18 +358,22 @@ const Inputform = ()=>{
                  name='linkedinurl'  
                  placeholder='Linkedin url'
                  value={ localData && localData.linkedinurl} 
+                 onChange={()=> setLocaldata(localData&&localData.linkedinurl)}
                  /><br/>
                 <input 
                 type='text' 
                 name='githuburl' 
                 placeholder='GitHub url'
                 value={ localData&& localData.githuburl} 
+                onChange={()=> setLocaldata(localData&&localData.githuburl)}
+
                 /><br/>
                 <input 
                 type='text'  
                 name='portfoliourl' 
                 placeholder='Portfolio url'
                 value={ localData&& localData.portfoliourl} 
+                onChange={()=> setLocaldata(localData&&localData.portfoliourl)}
                 /><br/>
             
              </div>
@@ -262,7 +381,7 @@ const Inputform = ()=>{
              <div className='Formdiv' >
                 <h2>Your Technical Skills</h2>
 
-                {skillAddMore.map((skill,index)=>{
+                {check && skillAddMore.map((skill,index)=>{
                     let no =0
                     return <> <hr/> 
                     <span style={{
@@ -273,12 +392,25 @@ const Inputform = ()=>{
                         color:"white",
                         borderRadius:"50px",
                         width:"20px"
-                    }}>{index+1}</span>  <Inputfield
+                    }}>{index+1}</span>  
+                     <div className='delete' style={{
+                        position:"absolute",
+                        marginTop:"10px",
+                        marginLeft:"-80px",
+                        right:"5vw",
+                        color:"black",
+                        cursor:"pointer",
+                       
+                    }} 
+                    onClick={(e)=>ondelete(e,skill,"skill")}
+                    ><DeleteForeverIcon style={{fontSize:"1.5rem",display:"inline"}}/></div> 
+                    <Inputfield
                     key={"skill"+index}
-                    skillvalue={skill[`skill${index}${no+1}`]}
-                    skilrvalue={skill[`skill${index}${no+1}r`]}
-                    skillname={"skill"+index+1}
-                    skillrating={"skill"+index+1+"r"}
+                  
+                    skillvalue={skill[`skill`]}
+                    skilrvalue={skill[`skillr`]}
+                    skillname={"skill"}
+                    skillrating={"skillr"}
                     /> </>
                 })}
                
@@ -299,24 +431,38 @@ const Inputform = ()=>{
                     color:"white",
                     borderRadius:"50px",
                     width:"20px"
-                }}>{index+1}</span>    <Inputfield2
+                }}>{index+1}</span>    
+                <div className='delete' style={{
+                        position:"absolute",
+                        marginTop:"10px",
+                        marginLeft:"-80px",
+                        right:"5vw",
+                        color:"black",
+                        cursor:"pointer",
+                       
+                    }} 
+                    onClick={(e)=>ondelete(e,edu,"exp")}
+                    ><DeleteForeverIcon 
+                    style={{fontSize:"1.5rem",display:"inline"}}/>
+                    </div> 
+                <Inputfield2
                 key={"exp"+index}
-                titlevalue={edu[`exp${expNo}title`]}
-                descvalue={edu[`exp${expNo}desc`]}
-                startmvalue={edu[`exp${expNo}startmonth`]}
-                startyvalue={edu[`exp${expNo}startyear`]}
-                endmvalue={edu[`exp${expNo}endmonth`]}
-                endyvalue={edu[`exp${expNo}endyear`]}
-                expvalue={edu[`exp${expNo}exptype`]}
-                // present={"exp"+expNo+"doing"}
-                exptitle={"exp"+expNo+"title"}
-                expdesc={"exp"+expNo+"desc"}
-                startmonth={"exp"+expNo+"startmonth"}
-                startyear={"exp"+expNo+"startyear"}
-                endmonth={"exp"+expNo+"endmonth"}
-                endyear={"exp"+expNo+"endyear"}
-                exptype={"exp"+expNo+"exptype"}
-                ondelete={(e)=>ondelete(e,expNo)}
+                titlevalue={edu[`exptitle`]}
+                descvalue={edu[`expdesc`]}
+                startmvalue={edu[`expstartmonth`]}
+                startyvalue={edu[`expstartyear`]}
+                endmvalue={edu[`expendmonth`]}
+                endyvalue={edu[`expendyear`]}
+                expvalue={edu[`expexptype`]}
+                Present={"expdoing"}
+                exptitle={"exptitle"}
+                expdesc={"expdesc"}
+                startmonth={"expstartmonth"}
+                startyear={"expstartyear"}
+                endmonth={"expendmonth"}
+                endyear={"expendyear"}
+                exptype={"expexptype"}
+                ondelete={(e)=>ondelete(e,edu)}
                
                 />    </>
                })}
@@ -336,15 +482,29 @@ const Inputform = ()=>{
                         color:"white",
                         borderRadius:"50px",
                         width:"20px"
-                    }}>{index+1}</span>  <Inputfieldtwo
+                    }}>{index+1}</span> 
+                     <div className='delete' style={{
+                        position:"absolute",
+                        marginTop:"10px",
+                        marginLeft:"-80px",
+                        right:"5vw",
+                        color:"black",
+                        cursor:"pointer",
+                       
+                    }} 
+                    onClick={(e)=>ondelete(e,pp,"pp")}
+                    ><DeleteForeverIcon 
+                    style={{fontSize:"1.5rem",display:"inline"}}/>
+                    </div> 
+                     <Inputfieldtwo
                     
-                    titlevalue={pp[`pp${index+1}t`]}
-                    descvalue={pp[`pp${index}${no+1}d`]}
-                    projurlvalue={pp[`pp${index}${no+1}url`]}
+                    titlevalue={pp[`ppt`]}
+                    descvalue={pp[`ppd`]}
+                    projurlvalue={pp[`ppurl`]}
                     key={"pp"+index}
-                    title={"pp"+(index+1)+"t"}
-                    desc={"pp"+index+1+"d"}
-                    projectUrl={"pp"+index+1+"url"}
+                    title={"ppt"}
+                    desc={"ppd"}
+                    projectUrl={"ppurl"}
                     titleplaceh={"Project Name"}
                     />
                     
@@ -366,21 +526,35 @@ const Inputform = ()=>{
                         color:"white",
                         borderRadius:"50px",
                         width:"20px"
-                    }}>{index+1}</span>   <Inputfield2
+                    }}>{index+1}</span> 
+                     <div className='delete' style={{
+                        position:"absolute",
+                        marginTop:"10px",
+                        marginLeft:"-80px",
+                        right:"5vw",
+                        color:"black",
+                        cursor:"pointer",
+                       
+                    }} 
+                    onClick={(e)=>ondelete(e,edu,"edu")}
+                    ><DeleteForeverIcon 
+                    style={{fontSize:"1.5rem",display:"inline"}}/>
+                    </div> 
+                      <Inputfield2
                     key={"edu"+index}
-                    titlevalue={edu[`edu${index+1}t`]}
-                    descvalue={edu[`edu${index}${no+1}d`]}
-                    startmvalue={edu[`edu${index}${no+1}srtmonth`]}
-                    startyvalue={edu[`edu${index}${no+1}srtyear`]}
-                    endmvalue={edu[`edu${index}${no+1}endmonth`]}
-                    endyvalue={edu[`edu${index}${no+1}endyear`]}
-                    // Present={"edu"+(index+1)+"doing"}
-                    exptitle={"edu"+(index+1)+"t"}
-                    expdesc={"edu"+index+1+"d"}
-                    startmonth={"edu"+index+1+"srtmonth"}
-                    startyear={"edu"+index+1+"srtyear"}
-                    endmonth={"edu"+index+1+"endmonth"}
-                    endyear={"edu"+index+1+"endyear"}
+                    titlevalue={edu[`edut`]}
+                    descvalue={edu[`edud`]}
+                    startmvalue={edu[`edusrtmonth`]}
+                    startyvalue={edu[`edusrtyear`]}
+                    endmvalue={edu[`eduendmonth`]}
+                    endyvalue={edu[`eduendyear`]}
+                    Present={"edudoing"}
+                    exptitle={"edut"}
+                    expdesc={"edud"}
+                    startmonth={"edusrtmonth"}
+                    startyear={"edusrtyear"}
+                    endmonth={"eduendmonth"}
+                    endyear={"eduendyear"}
                     descplaceh={"college name or more info's"}
                     />
                     </>
@@ -388,10 +562,89 @@ const Inputform = ()=>{
                                 <button onClick={(e)=> addMore(e,"edu")}  >Add More</button> <br/>
              </div>
 
-             {/* <div className='Formdiv' >
-                <h2>Let’s start with your personal info</h2>
-               
-             </div> */}
+             <div className='Formdiv' >
+                <h2>Certifications</h2>
+                {certification.map((cert,index)=> {
+                  
+                    return <> <hr/> 
+                    <span style={{
+                        position:"absolute",
+                        marginTop:"-21px",
+                        marginLeft:"-40px",
+                        backgroundColor:"black",
+                        color:"white",
+                        borderRadius:"50px",
+                        width:"20px"
+                    }}>{index+1}</span> 
+                     <div className='delete' style={{
+                        position:"absolute",
+                        marginTop:"10px",
+                        marginLeft:"-80px",
+                        right:"5vw",
+                        color:"black",
+                        cursor:"pointer",
+                       
+                    }} 
+                    onClick={(e)=>ondelete(e,cert,"cert")}
+                    ><DeleteForeverIcon 
+                    style={{fontSize:"1.5rem",display:"inline"}}/>
+                    </div> 
+                     <Inputfieldtwo
+                    
+                    titlevalue={cert[`cert-title`]}
+                    projurlvalue={cert[`cert-url`]}
+                    key={"cert"+index}
+                    title={"cert-title"}
+                    projectUrl={"cert-url"}
+                    titleplaceh={"Certification Name"}
+                    />
+                    
+                    </> 
+                })}
+                <button onClick={(e)=> addMore(e,"cert")}  >Add More</button> <br/>
+             </div>
+
+             <div className='Formdiv' >
+                <h2>Achievements</h2>
+                {achiev.map((ach,index)=> {
+                    let no=0
+                    return <> <hr/> 
+                    <span style={{
+                        position:"absolute",
+                        marginTop:"-21px",
+                        marginLeft:"-40px",
+                        backgroundColor:"black",
+                        color:"white",
+                        borderRadius:"50px",
+                        width:"20px"
+                    }}>{index+1}</span> 
+                     <div className='delete' style={{
+                        position:"absolute",
+                        marginTop:"10px",
+                        marginLeft:"-80px",
+                        right:"5vw",
+                        color:"black",
+                        cursor:"pointer",
+                       
+                    }} 
+                    onClick={(e)=>ondelete(e,ach,"Achievements")}
+                    ><DeleteForeverIcon 
+                    style={{fontSize:"1.5rem",display:"inline"}}/>
+                    </div> 
+                    <Inputfieldtwo
+                    
+                    titlevalue={ach[`Achievements`]}
+                    key={"Achievements"+index}
+                    title={"Achievements"}
+                    titleplaceh={"Achievements"}
+                    />
+                    </> 
+                })}
+                <button onClick={(e)=> addMore(e,"Achievements")}  >Add More</button> <br/>
+             </div>
+
+
+            
              <div style={{
                 textAlign:"center",
                 margin:"20px"
@@ -408,6 +661,7 @@ const Inputform = ()=>{
              }} 
              type='submit' 
              name='submit' 
+
              />
              </div>
              

@@ -1,6 +1,6 @@
 import React,{useRef,useState,useEffect} from "react"
 import PdfDownload from "../downloadpdf"
-const Templatethree = ()=>{
+const Templatefour = ()=>{
 
     const [data,setData] = useState()
     const localData = JSON.parse(localStorage.getItem("imsresumemakerdata"))
@@ -41,9 +41,9 @@ const Templatethree = ()=>{
         padding:"5px",
         backgroundColor:"white",
         
-        fontFamily: "Wix Madefor Text"
+        fontFamily: "Azeret Mono"
     }}>
-         <hr style={{border:"2px solid black"}}/>
+         <hr style={{border:"10px solid #3275e0"}}/>
         <div style={{
             textAlign:"center",
             marginTop:"10px",
@@ -51,7 +51,7 @@ const Templatethree = ()=>{
             <h2 style={{
                 fontSize:"29px",
                 margin:"0px",
-                   
+                color:"#3275e0"  
             }} >{data&&data.fullname}</h2>
             <h3 style={{
                 fontSize:"15px",
@@ -275,4 +275,4 @@ const Templatethree = ()=>{
     </div>
 }
 
-export default Templatethree
+export default Templatefour
