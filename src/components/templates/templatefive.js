@@ -53,14 +53,12 @@ const Templatefive = ()=>{
                 textAlign:"left",
                 justifyContent:"left",
                 fontWeight:"500",
-               
-
             }}>
                 <a href={data&&data.linkedinurl}> <LinkedInIcon style={{fontSize:"12px"}}/>LinkedIn</a> 
                 <a href={data&&data.githuburl}><GitHubIcon style={{fontSize:"12px"}}/>GitHub</a> 
                 <a href={data&&data.portfoliourl}><LanguageIcon style={{fontSize:"12px"}}/>Portfolio</a> 
-                <a href={"tell:"+ data&&data.phoneno}> <LocalPhoneIcon style={{fontSize:"12px"}}/>+91 {data&&data.phoneno}</a>
-                <a href={"mailto:"+ data&&data.email}><EmailIcon style={{fontSize:"12px"}}/>{data&&data.email}</a>
+                <a href={`tell:${data&&data.phoneno}`}> <LocalPhoneIcon style={{fontSize:"12px"}}/>+91 {data&&data.phoneno}</a>
+                <a href={`mailto:${data&&data.email}`}><EmailIcon style={{fontSize:"12px"}}/>{data&&data.email}</a>
             </div>
 
             <h2 style={{

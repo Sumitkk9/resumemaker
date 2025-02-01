@@ -71,8 +71,8 @@ const Templatefirst = ()=>{
                 gap:"10px",
                 justifyContent:"center",
             }}>
-            <a  style={{ color:"skyblue"}} href={"tell:"+ data&&data.phoneno}>+91 {data&&data.phoneno}</a>
-            <a  style={{ color:"skyblue"}} href={"mailto:"+ data&&data.email}>{data&&data.email}</a>
+            <a  style={{ color:"skyblue"}} href={`tell:${data&&data.phoneno}`}>+91 {data&&data.phoneno}</a>
+            <a  style={{ color:"skyblue"}} href={`mailto:${data&&data.email}`}>{data&&data.email}</a>
             </div>
         </div>
 

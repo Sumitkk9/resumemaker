@@ -73,8 +73,8 @@ const Templatefirst = ()=>{
                 gap:"10px",
                 justifyContent:"center"
             }}>
-            <a href={"tell:"+ data&&data.phoneno}>+91 {data&&data.phoneno}</a>
-            <a href={"mailto:"+ data&&data.email}>{data&&data.email}</a>
+            <a href={`tell:${data&&data.phoneno}`}>+91 {data&&data.phoneno}</a>
+            <a href={`mailto:${data&&data.email}`}>{data&&data.email}</a>
             </div>
         </div>
 
