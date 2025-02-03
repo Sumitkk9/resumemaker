@@ -2,9 +2,8 @@ import react from 'react'
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const AiRes = async(input)=>{
-
     try {
-        const genAI = new GoogleGenerativeAI("AIzaSyC5Gmx_DfgXg4R6B6SnZKK5RzEazBtH33o");
+        const genAI = new GoogleGenerativeAI(process.env.REACT_APP_AIKEY);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         const prompt = input;
        
