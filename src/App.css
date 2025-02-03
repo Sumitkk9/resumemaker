@@ -306,6 +306,53 @@ color: #646363;
   transform: scale(105%);
 }
 
+
+#aidiv{
+  background: linear-gradient(to left, #5433ff, #05b3ca, #a5fef7);
+  box-shadow: 0px 0px 5px 1px grey;
+  border-radius: 20px;
+  float: right;
+  margin-right: 100px;
+  position: absolute;
+  right: 1vw;
+  margin-top: -35px;
+  z-index: 10px;
+}
+#aidiv:hover{
+  background: white;
+  transform: scale(105%);
+  
+}
+#aiBtn{
+ font-family: "Outfit", serif;
+ margin: 3px;
+ font-size: 0.7rem;
+ display: inline;
+ color: #5433ff;
+ background-color: rgb(255, 251, 251);
+ border: none;
+ border-radius: 20px;
+ cursor: pointer;
+}
+
+#aiBtn:hover{
+  transform: scale(105%);
+  color: white;
+  background: linear-gradient(to left, #5433ff, #05b3ca, #a5fef7);
+
+}
+#aiBtn:active{
+  transform: scale(105%);
+  color: black;
+  background: linear-gradient(to right, #5433ff, #05b3ca, #a5fef7);
+
+}
+
+#aidiv>img{
+  width: 30px
+}
+
+
 @media screen and (max-width: 720px) {
   .homepagemaindiv{
     grid-template-columns: 30% 70%;
@@ -360,5 +407,14 @@ color: #646363;
     .templatecard{
       height: 40vh;
     }
+
+    #aidiv{
+     right: -17vw;
+     
+      margin-top: -35px;
+     
+    }
     
 }
+
+

@@ -1,7 +1,10 @@
 import react,{useState,useEffect} from 'react'
 import {Inputfield,Inputfield2,Inputfieldtwo} from './inputfield.js'
 import "../App.css"
+import AiRes from "./ai"
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import AibotImg from '../img/aibot.gif'
 const Inputform = ()=>{
 
     const [localData,setLocaldata] = useState()
@@ -14,7 +17,7 @@ const Inputform = ()=>{
     const [pproject,setPp] = useState([[]])
     const [edu,setEdu] = useState([[]])
     const [achiev,setAchiev] = useState([[]])
-
+    const [aidata, setAidata] = useState()
 
     useEffect(()=>{
         let data = JSON.parse(localStorage.getItem("imsresumemakerdata"))
@@ -40,6 +43,9 @@ const Inputform = ()=>{
         }
         if(data){
             data.Achievements&&   setAchiev(data.Achievements)
+        }
+        if(data){
+            data.Achievements&&   setAidata(data.summary)
         }
         
     },[])
@@ -273,6 +279,17 @@ const Inputform = ()=>{
 
     }
 
+    const [showBtnAi,setBtnAi] = useState(false)
+   
+    const Ai = async(e)=> {
+        e.preventDefault()
+        setBtnAi(true)
+         const response= await AiRes(aidata? aidata : localData&& localData.summary )
+         response && await setBtnAi( false)
+         setAidata(response)
+       
+        }
+
     
     return(
         <div className='maindivfrom' >
@@ -320,15 +337,36 @@ const Inputform = ()=>{
                 placeholder='Enter Full Name'/><br/>
 
                 <input 
-                value={ localData&& localData.role} 
+                value={  localData&& localData.role} 
                 onChange={()=> setLocaldata(localData&&localData.role)}
                 type='text' 
                 name='role' 
                 placeholder='Role: eg. frontend,backend etc..'/><br/>
                 
-                <textarea value={ localData&& localData.summary} 
+                <textarea 
+                value={ aidata} 
                  name='summary' 
-                 placeholder='Summary' /> <br/>
+                 placeholder='Summary' 
+                 onChange={(e)=>setAidata(e.target.value)}
+                 style={{height:"100px"}}
+                 />                   <br/>
+                 {aidata && aidata.length>100 &&
+                  <div id='aidiv'>
+                    {
+                        showBtnAi? <img src={AibotImg} alt='ai'/> :
+                    
+                  <button 
+                  id='aiBtn' 
+                  onClick={(e)=>Ai(e)}
+                  > <AutoAwesomeIcon style={{
+                    fontSize:"1rem",
+                    display:"inline",
+                    color:"#05b3ca"
+                  }}/> Inhance</button> 
+                    }
+                  </div> 
+                 }
+                 
 
                 <input type='text' 
                     maxLength={10} 

@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 
-
 const Inputfield = ({skillname,skillrating,skillvalue,skilrvalue,onchange})=>{
     const [ skillV,SetSkillValue] = useState()
     

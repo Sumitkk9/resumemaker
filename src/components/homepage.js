@@ -35,6 +35,7 @@ const Homepage = ()=>{
             </div>
         <div  className="leftdivmenu" >
             {Menus.map((itms,index)=>{
+                
                 return <button onClick={()=>  window.open(itms.url, "_self", "noopener,noreferrer")} key={index+itms.name}>{itms.name}</button>
             })}
              <hr style={{width:"80%"}} />
